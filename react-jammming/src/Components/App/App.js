@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       searchResults: [
         {
+          id: '',
           name: '',
           artist: '',
           album: ''
@@ -19,13 +20,22 @@ class App extends Component {
       playlistName: '',
       playlistTracks: [
         {
-
+          id: '1',
+          name: '绵绵test1',
+          artist: 'Perfect',
+          album: 'test'
+        },
+        {
+          id: '2',
+          name: '绵绵test3',
+          artist: 'blahblah',
+          album: 'dfghfd'
         }
       ]
 
     };
 
-    // this.addTrack = this.addTrack.bind(this);
+    this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
@@ -33,23 +43,24 @@ class App extends Component {
   }
 
   //adds a song to the playlist
-  // addTrack(track) {
-  //   this.state.playlistTracks.map(function (item) {
-  //     if(track.id === item.id){
-  //       return false;
-  //     }
-  //   });
-  //
-  //   this.setState({
-  //     playlistTracks: this.state.playlistTracks.push(track)
-  //   })
-  // }
+  addTrack(track) {
+    this.state.playlistTracks.map(function (item) {
+      if(track.id === item.id){
+        return false;
+      }
+    });
+
+    this.setState({
+      playlistTracks: this.state.playlistTracks.push(track)
+    })
+  }
 
   // removes a song from a user's custom playlist
   removeTrack(track){
-    var trackIndex = this.state.playlistTracks.filter(function (item) {
-      // return item.id !== track.id;
-    })
+    const trackIndex = this.state.playlistTracks.filter(function (item) {
+      return item.id !== track.id;
+    });
+
     this.setState({
       playlistTracks: trackIndex
     })
@@ -63,7 +74,7 @@ class App extends Component {
   }
 
   savePlaylist(){
-    var trackUris = this.state.playlistTracks.map(track => track.uri);
+    const trackUris = this.state.playlistTracks.map(track => track.uri);
     return trackUris;
   }
 
@@ -78,6 +89,7 @@ class App extends Component {
 
 
   render() {
+    console.log(this)
     return (
       <div>
        <h1>Ja<span className="highlight">mmm</span>ing</h1>
