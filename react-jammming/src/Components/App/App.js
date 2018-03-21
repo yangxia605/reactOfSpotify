@@ -9,27 +9,35 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      searchResults: [
+      searchResults : [ {
+        id: '1',
+        name: 'search result 1',
+        artist: '搜索结果1',
+        album: '123',
+        isRemoval: false
+      },
         {
-          id: '',
-          name: '',
-          artist: '',
-          album: ''
-        }
-      ],
+          id:'2',
+          name: 'search result 2',
+          artist: '搜索结果2',
+          album: '234',
+          isRemoval: false
+        }],
       playlistName: '',
       playlistTracks: [
         {
           id: '1',
           name: '绵绵test1',
           artist: 'Perfect',
-          album: 'test'
+          album: 'test',
+          isRemoval: true
         },
         {
           id: '2',
           name: '绵绵test3',
           artist: 'blahblah',
-          album: 'dfghfd'
+          album: 'dfghfd',
+          isRemoval: true
         }
       ]
 
@@ -97,7 +105,7 @@ class App extends Component {
           <SearchBar
           onSearch={this.search}/>
           <div className="App-playlist">
-            <SearchResults searchResult={this.state.searchResults} onAdd={this.addTrack}/>
+            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
             <Playlist
               playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
