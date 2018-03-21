@@ -44,7 +44,7 @@ class App extends Component {
 
   //adds a song to the playlist
   addTrack(track) {
-    this.state.playlistTracks.map(function (item) {
+    this.state.playlistTracks.map((item) => {
       if(track.id === item.id){
         return false;
       }
