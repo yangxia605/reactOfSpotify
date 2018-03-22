@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      searchResults : [ {
+      searchResults :[{
         id: '1',
         name: 'search result 1',
         artist: '搜索结果1',
@@ -17,8 +17,8 @@ class App extends Component {
         isRemoval: false
       },
         {
-          id:'2',
-          name: 'search result 2',
+          id:'3',
+          name: 'search result 3',
           artist: '搜索结果2',
           album: '234',
           isRemoval: false
@@ -42,51 +42,46 @@ class App extends Component {
       ]
 
     };
-
-    this.addTrack = this.addTrack.bind(this);
-    this.removeTrack = this.removeTrack.bind(this);
-    this.updatePlaylistName = this.updatePlaylistName.bind(this);
-    this.savePlaylist = this.savePlaylist.bind(this);
-    this.search=this.search.bind(this);
   }
 
   //adds a song to the playlist
-  addTrack(track) {
+  addTrack = (track) =>{
+    let songExists = false;
     this.state.playlistTracks.map((item) => {
       if(track.id === item.id){
-        return false;
+        songExists = true;
       }
     });
-
-    this.setState({
-      playlistTracks: this.state.playlistTracks.push(track)
-    })
-  }
+    if(!songExists){
+      this.setState({
+        playlistTracks: [...this.state.playlistTracks,{...track,isRemoval:true}]
+      })
+    }
+  };
 
   // removes a song from a user's custom playlist
-  removeTrack(track){
-    const trackIndex = this.state.playlistTracks.filter(function (item) {
+  removeTrack = (track) =>{
+    const trackIndex = this.state.playlistTracks.filter((item) => {
       return item.id !== track.id;
     });
-
     this.setState({
       playlistTracks: trackIndex
     })
-  }
+  };
 
 // allows a learner to change the name of their playlist
-  updatePlaylistName(name){
+  updatePlaylistName = (name) =>{
     this.setState({
       playlistName: name
     })
-  }
+  };
 
-  savePlaylist(){
+  savePlaylist = () =>{
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     return trackUris;
   }
 
-  search(term){
+  search = (term) =>{
     Spotify.search(term).then(tracks => {
       this.setState({
         playlistTracks: tracks
