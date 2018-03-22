@@ -78,21 +78,22 @@ class App extends Component {
 
   savePlaylist = () =>{
     const trackUris = this.state.playlistTracks.map(track => track.uri);
-    return trackUris;
-  }
+    Spotify.savePlaylist(trackUris,this.state.playlistName)
+  };
 
   search = (term) =>{
     Spotify.search(term).then(tracks => {
+
+      console.log(tracks);
       this.setState({
-        playlistTracks: tracks
+        searchResults: [...this.state.searchResults,...tracks]
       })
     })
-  }
+  };
 
 
 
   render() {
-    console.log(this)
     return (
       <div>
        <h1>Ja<span className="highlight">mmm</span>ing</h1>
