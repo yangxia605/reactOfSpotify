@@ -9,37 +9,9 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      searchResults :[{
-        id: '1',
-        name: 'search result 1',
-        artist: '搜索结果1',
-        album: '123',
-        isRemoval: false
-      },
-        {
-          id:'3',
-          name: 'search result 3',
-          artist: '搜索结果2',
-          album: '234',
-          isRemoval: false
-        }],
+      searchResults :[],
       playlistName: '',
-      playlistTracks: [
-        {
-          id: '1',
-          name: '绵绵test1',
-          artist: 'Perfect',
-          album: 'test',
-          isRemoval: true
-        },
-        {
-          id: '2',
-          name: '绵绵test3',
-          artist: 'blahblah',
-          album: 'dfghfd',
-          isRemoval: true
-        }
-      ]
+      playlistTracks: []
 
     };
   }
@@ -76,18 +48,30 @@ class App extends Component {
     })
   };
 
-  savePlaylist = () =>{
+  userSavePlaylist = () => {
+    debugger;
     const trackUris = this.state.playlistTracks.map(track => track.uri);
-    Spotify.savePlaylist(trackUris,this.state.playlistName)
+    const playlistName = this.state.playlistName;
+    Spotify.savePlaylist(playlistName,trackUris).then(response => {
+      if(response){
+        this.setState({
+          playlistName: 'New Playlist',
+          searchResults: []
+        })
+      }
+    })
   };
 
   search = (term) =>{
     Spotify.search(term).then(tracks => {
 
       console.log(tracks);
-      this.setState({
-        searchResults: [...this.state.searchResults,...tracks]
-      })
+      if(tracks){
+        this.setState({
+          searchResults: [...this.state.searchResults,...tracks]
+        })
+      }
+
     })
   };
 
@@ -107,7 +91,7 @@ class App extends Component {
               playlistTracks={this.state.playlistTracks}
               onRemove={this.removeTrack}
               onNameChange={this.updatePlaylistName}
-              onSave={this.savePlaylist}
+              onSave={this.userSavePlaylist}
             />
           </div>
         </div>
