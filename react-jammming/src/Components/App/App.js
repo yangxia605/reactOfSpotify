@@ -52,7 +52,7 @@ class App extends Component {
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     const playlistName = this.state.playlistName;
     Spotify.savePlaylist(playlistName,trackUris).then(response => {
-      if(response){
+      if(response !== 'error'){
         this.setState({
           playlistName: 'New Playlist',
           searchResults: []
