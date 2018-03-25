@@ -25,8 +25,10 @@ class App extends Component {
       }
     });
     if(!songExists){
+      let newPlaylist = this.state.playlistTracks;
+      newPlaylist.push(track);
       this.setState({
-        playlistTracks: [...this.state.playlistTracks,{...track,isRemoval:true}]
+        playlistTracks: newPlaylist
       })
     }
   };
@@ -52,7 +54,7 @@ class App extends Component {
     const trackUris = this.state.playlistTracks.map(track => track.uri);
     const playlistName = this.state.playlistName;
     Spotify.savePlaylist(playlistName,trackUris).then(response => {
-      if(response.snapshot_id && response.snapshot_id !== ''){
+      if(response){
         this.setState({
           playlistName: 'New Playlist',
           playlistTracks: []
@@ -63,9 +65,10 @@ class App extends Component {
 
   search = (term) =>{
     Spotify.search(term).then(tracks => {
+      console.log(tracks)
       if(tracks){
         this.setState({
-          searchResults: [...this.state.searchResults,...tracks]
+          searchResults: tracks
         })
       }
 
