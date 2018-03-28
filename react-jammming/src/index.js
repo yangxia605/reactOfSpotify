@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './reducers/index';
+import playlistApp from './reducers/playlistApp';
 import { createLogger } from 'redux-logger'
 import { Provider } from 'react-redux';
 import './index.css';
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const store = createStore(
-  reducer,
+  playlistApp,
   applyMiddleware(...middleware)
 );
 
