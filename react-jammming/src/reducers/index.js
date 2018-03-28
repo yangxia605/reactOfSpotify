@@ -1,0 +1,1 @@
+/** * Created by mianmian on 2018/3/27. */import { combineReducers } from 'redux';import getSearchTracksReducer from './getSearchTracksReducer'// import search from './search'const playlistApp = combineReducers({  getSearchTracksReducer});export default playlistApp;

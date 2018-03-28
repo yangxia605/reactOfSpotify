@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+
 import './App.css';
-import SearchBar from "../SearchBar/SearchBar";
-import SearchResults from "../SearchResults/SearchResults";
-import Playlist from "../Playlist/Playlist";
+import SearchTracks from "../Search/SearchTracks";
+import SearchResultsContainer from "../../containers/SearchResults/SearchResultsContainer";
+import Playlists from "../../containers/Playlist/Playlist";
 import  Spotify  from "../../util/Spotify";
 
 class App extends Component {
@@ -63,30 +64,16 @@ class App extends Component {
     })
   };
 
-  search = (term) =>{
-    Spotify.search(term).then(tracks => {
-      console.log(tracks)
-      if(tracks){
-        this.setState({
-          searchResults: tracks
-        })
-      }
-
-    })
-  };
-
-
 
   render() {
     return (
       <div>
        <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
-          <SearchBar
-          onSearch={this.search}/>
+          <SearchTracks/>
           <div className="App-playlist">
-            <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
-            <Playlist
+            <SearchResultsContainer/>
+            <Playlists
               playlistName={this.state.playlistName}
               playlistTracks={this.state.playlistTracks}
               onRemove={this.removeTrack}
