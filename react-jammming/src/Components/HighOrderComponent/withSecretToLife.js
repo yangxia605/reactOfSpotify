@@ -1,0 +1,1 @@
+/** * Created by mianmian on 2018/3/30. */import React from 'react';const withSecretToLife = (WrappedComponent) => {  class HOC extends React.Component {    render() {      return (        <WrappedComponent          secretToLife={42}          name="mianmian"          {...this.props}        />      );    }  }  return HOC;};export default withSecretToLife;

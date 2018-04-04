@@ -4,6 +4,7 @@ import './App.css';
 import SearchTracks from "../Search/SearchTracks";
 import SearchResultsContainer from "../../containers/SearchResults/SearchResultsContainer";
 import Playlist from "../../containers/Playlist/Playlist";
+import WrappedComponent from '../HighOrderComponent/DisplayTheSecret'
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
        <h1>Ja<span className="highlight">mmm</span>ing</h1>
         <div className="App">
           <SearchTracks/>
+          <WrappedComponent/>
           <div className="App-playlist">
             <SearchResultsContainer/>
             <Playlist/>

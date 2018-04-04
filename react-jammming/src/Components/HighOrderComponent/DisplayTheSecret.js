@@ -1,0 +1,1 @@
+/** * Created by mianmian on 2018/3/30. */import React from 'react'import withSecretToLife from './withSecretToLife'const DisplayTheSecret = props => (  <div>    The secret to life is {props.secretToLife}.    <br />    My name is  {props.name}.  </div>);const WrappedComponent = withSecretToLife(DisplayTheSecret);export default WrappedComponent;
